@@ -1,0 +1,15 @@
+#+TITLE: linux帐号管理与ACL权限控制
+* linux的帐号与群组
+** 使用者标识符：UID与GID
+** 使用者帐号：/etc/passed文件结构,/etc/shadow文件结构
+** 关于群组：/etc/group文件结构,有效与初始群组,groups,newgrp,/etc/gshadow
+* 帐号管理
+** 新增与移除使用者：useradd,useradd 参考文档,passwd,chage,usermod,userdel
+** 用户功能:finger,chfn,chsh,id
+** 
+**
+* 主机的细部权限规划：ACL的使用
+* 使用者身份切换
+* 使用者的特殊shell与PAM模块
+* linux主机上的用户信息传递
+* 手动新增使用者
