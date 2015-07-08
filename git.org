@@ -9,12 +9,39 @@ Git是一个功能强大的开源分布式版本管理系统
 创建本地版本库目录
 git init
 添加本地文件到本地目录
-git add file1
-git commit -m "add 1 file" 
+git add file1 将工作区的修改放入暂存区，准备提交
+git commit -m "add 1 file" 只提交暂存区的修改，工作区的修改保持不变
 ** 掌握你的工作区状态
 git status掌握工作区状态
 git diff查看工作区文件内容的修改情况
 ** 版本回退
-
+git log可以查看commit提交的历史记录
+git reset --hard commit_id在各个版本的历史之间穿梭
+git reset --hard HEAD放弃工作区和index的改动,HEAD仍指向当前的commit
+git reset --hard HEAD~N回退到之前的N个版本
+要穿梭回未来的话,使用git reflog查看命令历史,以便确定退回版本的commit_id
+** 工作区和暂存区
+工作区--就是你的电脑中的工作目录
+暂存区：
+git版本库添加文件的两步：
+1.git add把文件添加进去,实际上就是把文件修改添加到暂存区
+2.git commit提交更改,实际上就是把暂存区的所有内容提交到当前分支
+** 管理修改
+git设计的一大精髓就是其跟踪并管理的是修改而非文件
+** 撤销修改
+场景1：当你扰乱了工作区某个文件的内容，想要直接丢弃工作区的修改时 git checkout --file
+场景2：当你不但扰乱了工作区的内容,还添加到了暂存区,想要丢弃修改,分两步,第一步用命令git reset HEAD file,就回到了场景1,第二步按场景1操作.
+场景3：已经提交了不合适的修改到版本库时,想要撤销本次提交,参考版本回退一节,不过前提是没有推送到远程库.
+** 删除文件
+在工作区中使用rm删除文件之后,可以使用git rm file,再git commit将文件从版本库中删除
+;或者使用git checkout --file用版本库里的最新版本恢复工作区的版本
 * 远程仓库
+一般使用较多的远程仓库是github,其与本地git仓库的传输是通过SSH加密的.
+不过在Github上托管的免费仓库,是对所有人可见的。如果不想要让别人看见的话,可以使用github付费帐号;或者自己动手搭建一个Git服务器.
+** 添加远程库
+要关联一个远程库,使用命令git remote add origin git@server-name:path/repo-name.git
+关联后,使用git push -u origin master第一次推送master分支的所有内容
+此后,每次推送使用命令git push origin master推送最新修改
+** 从远程库克隆
+git clone git@server-name:path/repo-name.git
 * 分支管理
